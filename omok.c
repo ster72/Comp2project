@@ -18,12 +18,10 @@ int main(){
 	individual *ivd1, *ivd2;
 	int param[2];
 	
-	while(z < 255)
+	while(1)
 	{
-		printf("x : ");
-		scanf("%d", &x);
-		printf("y : ");
-		scanf("%d", &y);
+		printf("x, y를 입력\n");
+		scanf("%d, %d", &x, &y);
 		
 		rand_population(pop);//랜덤수 추출 
 	
@@ -37,7 +35,6 @@ int main(){
 			}
 		printf("\n");
 		}	
-		z++;
 	}	
 	free_population(pop);
 	printf("아무키나 누르십시오...");getchar();
