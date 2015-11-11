@@ -21,13 +21,14 @@ int main(){
 	while(1)
 	{
 		printf("x, y를 입력\n");
-		scanf("%d, %d", &x, &y);
+		scanf("%d %d", &x, &y);
 		
 		rand_population(pop);//랜덤수 추출 
 	
 		evaluate(pop,fitness_func);
 
 		for(i = 0; i < pop->pop_size; i++){
+			printf("컴퓨터의 출력\n");
 		 for(j = 0; j < bit_count; j++){
 			 if(j==8)
 			 printf(" ");
