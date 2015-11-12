@@ -1,4 +1,4 @@
-#include "common.h"
+#include "comp2.h"
 
 population* create_population(int pop_size, int bit_count, int data_count);
 void free_population(population *pop);
@@ -10,7 +10,7 @@ void mutate(chromosome *crms, int bit_count);
 individual* select_individual(population *pop);
 
 int main(){
-	int i, j, x, y, z=0;
+	int i, j, x, y, z;
 	int pop_size = 1;
 	int bit_count = 2;
 	int data_count = 2;
@@ -18,9 +18,9 @@ int main(){
 	individual *ivd1, *ivd2;
 	int param[2];
 	
-	while(1)
+	for(z=0;z<255;z++)
 	{
-		printf("x, y를 입력\n");
+		printf("x, y 입력\n");
 		scanf("%d %d", &x, &y);
 		
 		rand_population(pop);//랜덤수 추출 
@@ -30,8 +30,6 @@ int main(){
 		for(i = 0; i < pop->pop_size; i++){
 			printf("컴퓨터의 출력\n");
 		 for(j = 0; j < bit_count; j++){
-			 if(j==8)
-			 printf(" ");
 			printf("%d ", pop->ivd[i].crms[j]);//랜덤한 좌표출력 
 			}
 		printf("\n");
