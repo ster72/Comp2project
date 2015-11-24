@@ -3,6 +3,7 @@
 #include <math.h>
 #include <time.h>
 #include <windows.h>
+#include <string.h>
 
 typedef int bit;
 
@@ -23,8 +24,21 @@ typedef struct{
 	int data_count;	
 } population; 
 
-int min(int a,int b);
+population* create_population(int pop_size, int bit_count, int data_count);
+void free_population(population *pop);
+int rand_between(int a, int b);
+void rand_population(population *pop);
+void evalutate(population *pop, double (*function)(int[], int));
+double fitness_func(int *param, int data_count);
+void mutate(chromosome *crms, int bit_count);
+individual* select_individual(population *pop);
+int board[15][15];
+int board2[15];
 
+
+
+int min(int a,int b);
+/*개체군 생성*/ 
 population* create_population(int pop_size, int bit_count, int data_count){
 	int i;
 	
@@ -44,7 +58,7 @@ population* create_population(int pop_size, int bit_count, int data_count){
 	return pop;
 	
 }
-
+/*제거 함수*/
 void free_population(population *pop){
 	int i;
 	
@@ -63,7 +77,7 @@ int rand_between(int a, int b){
 	randnum = rand()%delta;
 	return (min(a,b) + randnum);
 }
-
+/*랜덤 추출*/
 void rand_population(population *pop){
 	int i;
 	int pos;
@@ -142,7 +156,7 @@ void mutate(chromosome *crms, int bit_count){
 	int i;
 	
 	for(i = 0; i < bit_count; i++){
-		if(rand_between(0, 300) == 0){
+		if(rand_between(0, 225) == 0){
 			crms[i] ^= 1;
 		}
 	}
