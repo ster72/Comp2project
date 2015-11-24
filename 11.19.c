@@ -2,7 +2,7 @@
 
 int main()
 {
-	int i, j, x, y, z;
+	int x, y;
 	int check = 0;
 	int pop_size = 1;
 	int bit_count = 2;
@@ -17,7 +17,7 @@ int main()
 		printf("y : ");
 		scanf("%d", &y);
 	
-	    if(x<0 || x>14)
+	    if(x<0 || x>14)// 오목판을 넘어가는 숫자를 입력시 다시 입력 
 	    {
 			check = 1;
 		}
@@ -33,12 +33,19 @@ int main()
 			check = 0;
 			continue;
 		}
+		
+		if(board[x][y] == 1)// 중복을막음 
+		{
+		printf("중복된 곳입니다.\n");
+		continue;
+  		}
+    	board[x][y] = 1;
 	
 		rand_population(pop);//랜덤수 추출 
 
-		for(i = 0; i < pop->pop_size; i++){
+		for(int i = 0; i < pop->pop_size; i++){
 			printf("컴퓨터의 출력\n");
-		 for(j = 0; j < bit_count; j++){
+		 for(int j = 0; j < bit_count; j++){
 			printf("%d ", pop->ivd[i].crms[j]);//랜덤한 좌표출력 
 			}
 		printf("\n");
