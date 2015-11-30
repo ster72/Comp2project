@@ -33,7 +33,9 @@ double fitness_func(int *param, int data_count);
 void mutate(chromosome *crms, int bit_count);
 individual* select_individual(population *pop);
 int board[15][15];
-int board2[15];
+void crossover(chromosome *old_c1, chromosome *old_c2, chromosome *new_c1, chromosome *new_c2);
+void breed(individual *old_v1, individual *old_v2, individual *new_v1, individual *new_v2, int bit_count);
+void new_generate(population *old_pop, population *new_pop);
 
 
 
@@ -187,4 +189,45 @@ individual* select_individual(population *pop){
 	   return &pop->ivd[index1];
 	else
 	   return &pop->ivd[index2];
+}
+
+void crossover(chromosome *old_c1, chromosome *old_c2, chromosome *new_c1, chromosome *new_c2)
+{
+	int i;
+	int pos;
+	//염색체의 데이터 복제
+	for(i=0;i<bit_count;i++)
+	{
+		new_c1[i] = old_c2[i];
+		new_c2[i] = old_c1[i];
+	}
+	//교배할 위치를 얻어낸다. 
+	pos = rand_between(0, bit_count - 1);
+	// 특정 위치의 데이터를 교배한다.
+	 new_c1[pos] = old_c1[pos];
+	 new_c2[pos] = old_c2[pos];
+}
+
+void breed(individual *old_v1, individual *old_v2, individual *new_v1, individual *new_v2, int bit_count)
+{
+	//교배시킨다.
+	crossover(old_v1->crms, old_v2->crms, new_v1->crms, new_v2->crms, bit_count);
+	//돌연변이를 가한다.
+	mutate(new_v1->crms, bit_count);
+	mutate(new_v2->crms, bit_count);
+}
+void new_generate(population *old_pop, population *new_pop)
+{
+	int i;
+	individual *v1, *v2;
+	//랜덤하게 2개의 개체를 pop_size/2번
+	for(i=0;i<old_pop->pop_size;i+=2)
+	{
+		//배양한 개체쌍 선택
+		v1 = select_individual(old_pop);
+		v2 = select_individual(old_pop);
+		//배양해서 개체군의 개체를 만들고 새로운 세대를 만든다.
+		breed(v1, v2, &new_pop->ivd[i], &new_pop->ivd[i+1], old_pop->bit_count); 
+		 
+	} 
 }
