@@ -23,8 +23,7 @@ int main()
 	printf("교배하시겠습니까?\n");
     	printf("(1)적응도 (2)진행\n");
     	scanf("%d", &z);
-    	
-    	srand((unsigned)time(NULL));
+  
     
     
 	while(1)
